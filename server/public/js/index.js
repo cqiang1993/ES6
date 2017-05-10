@@ -49,21 +49,53 @@
 
 /***/ }),
 /* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	__webpack_require__(2);
+
+/***/ }),
+/* 2 */
 /***/ (function(module, exports) {
 
 	'use strict';
 
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	{
+	  var regex = new RegExp('xyz', 'i');
+	  var regex2 = new RegExp(/xyz/i);
 
-	var Test = function Test() {
-		_classCallCheck(this, Test);
+	  console.log(regex.test('xyz123'), regex2.test('xyz123'));
 
-		this.a = 'hello world1';
-	};
+	  var regex3 = new RegExp(/xyz/ig, 'i');
+	  console.log(regex3.flags);
+	}
 
-	var test = new Test();
+	{
+	  var s = 'bbb_bb_b';
+	  var a1 = /b+/g;
+	  var a2 = new RegExp('b+', 'y');
+	  console.log('one', a1.exec(s), a2.exec(s));
+	  console.log('two', a1.exec(s), a2.exec(s));
 
-	document.body.innerHTML = test.a;
+	  console.log(a1.sticky, a2.sticky);
+	}
+
+	{
+	  console.log('u-1', /^\uD83D/.test('\uD83D\uDC2A'));
+	  console.log('u-2', /^(?:\uD83D(?![\uDC00-\uDFFF]))/.test('\uD83D\uDC2A'));
+
+	  console.log(/\u{61}/.test('a'));
+	  console.log(/a/.test('a'));
+
+	  console.log('\uD842\uDFB7');
+	  var _s = '𠮷';
+	  console.log('u-1', /^.$/.test(_s));
+	  console.log('u-2', /^(?:[\0-\t\x0B\f\x0E-\u2027\u202A-\uD7FF\uE000-\uFFFF]|[\uD800-\uDBFF][\uDC00-\uDFFF]|[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF])$/.test(_s));
+
+	  console.log('test-1', /𠮷{2}/.test('𠮷𠮷'));
+	  console.log('test-2', /(?:\uD842\uDFB7){2}/.test('𠮷𠮷'));
+	}
 
 /***/ })
 /******/ ]);
