@@ -8703,53 +8703,67 @@
 
 	'use strict';
 
-	var _templateObject = _taggedTemplateLiteral(['i am ', ',', ''], ['i am ', ',', '']),
-	    _templateObject2 = _taggedTemplateLiteral(['Hi\n', ''], ['Hi\\n', '']);
+	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
-	function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 	{
-	  console.log('a', 'a');
-	  console.log('s', '\u20BB7'); //大于0xFFFF
+	  // 简洁表示法
+	  var o = 1;
+	  var k = 2;
+	  var es5 = {
+	    o: o,
+	    k: k
+	  };
+	  var es6 = {
+	    o: o,
+	    k: k
+	  };
+	  console.log(es5, es6);
 
-	  console.log('s', '\uD842\uDFB7');
+	  var es5_method = {
+	    hello: function hello() {
+	      console.log('hello');
+	    }
+	  };
+	  var es6_method = {
+	    hello: function hello() {
+	      console.log('hello');
+	    }
+	  };
+	  console.log(es5_method.hello(), es6_method.hello());
 	}
 
 	{
-	  var s = '𠮷';
-	  console.log('length', s.length);
-	  console.log('0', s.charAt(0));
-	  console.log('1', s.charAt(1));
-	  console.log('at0', s.charCodeAt(0));
-	  console.log('at1', s.charCodeAt(1));
+	  // 属性表达式
+	  var a = 'b';
+	  var es5_obj = {
+	    a: 'c',
+	    b: 'c'
+	  };
+	  var es6_obj = _defineProperty({}, a, 'c');
 
-	  var s1 = '𠮷a';
-	  console.log('length', s1.length);
-	  console.log(('code0', s1.codePointAt(0)));
-	  console.log(('code0', s1.codePointAt(0)).toString(16));
-	  console.log(('code0', s1.codePointAt(1)));
-	  console.log(('code0', s1.codePointAt(2)));
+	  console.log(es5_obj, es6_obj);
 	}
 
 	{
-	  console.log(String.fromCharCode("0x20bb7"));
-	  console.log(String.fromCodePoint("0x20bb7"));
-	}
+	  // 新增API
+	  console.log('字符串', Object.is('abc', 'abc'), 'abc' === 'abc');
+	  console.log('数组', Object.is([], []), [] === []);
 
-	{
-	  var str = '\uD842\uDFB7abc';
-	  for (var i = 0; i < str.length; i++) {
-	    console.log('es5', str[i]);
-	  }
+	  console.log('拷贝', Object.assign({ a: 'a' }, { b: 'b' }));
+	  var test = { k: 123, o: 456 };
 	  var _iteratorNormalCompletion = true;
 	  var _didIteratorError = false;
 	  var _iteratorError = undefined;
 
 	  try {
-	    for (var _iterator = str[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-	      var code = _step.value;
+	    for (var _iterator = Object.entries(test)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+	      var _step$value = _slicedToArray(_step.value, 2),
+	          key = _step$value[0],
+	          value = _step$value[1];
 
-	      console.log('es6', code);
+	      console.log([key, value]);
 	    }
 	  } catch (err) {
 	    _didIteratorError = true;
@@ -8765,50 +8779,17 @@
 	      }
 	    }
 	  }
+
+	  ;
 	}
 
 	{
-	  var _str = "string";
-	  console.log('includes', _str.includes("r"));
-	  console.log('includes', _str.includes("c"));
-
-	  console.log('start', _str.startsWith('str'));
-	  console.log('end', _str.endsWith('ng'));
-	}
-
-	{
-	  var _str2 = "abc";
-	  console.log(_str2.repeat(2));
-	}
-
-	{
-	  var name = "list";
-	  var info = "hello world";
-	  var m = 'i am ' + name + ',' + info;
-	  console.log(m);
-	}
-
-	{
-	  console.log('1'.padStart(2, '0'));
-	  console.log('1'.padEnd(2, '0'));
-	}
-
-	{
-	  var abc = function abc(s, v1, v2) {
-	    console.log(s, v1, v2);
-	    return s + v1 + v2;
-	  };
-
-	  var user = {
-	    name: "list",
-	    info: "hello world"
-	  };
-	  console.log(abc(_templateObject, user.name, user.info));
-	}
-
-	{
-	  console.log(String.raw(_templateObject2, 1 + 2));
-	  console.log('Hi\n' + (1 + 2));
+	  // 扩展运算符
+	  // let {a,b,...c} = {a:'test',b:'kill',c:'ddd',d:'ccc'};
+	  // c = {
+	  //   c:'ddd',
+	  //   d:'ccc'
+	  // }
 	}
 
 /***/ })
