@@ -14,7 +14,7 @@
     "morgan": "~1.6.1",
     "serve-favicon": "~2.3.0"
   },
-  "devDependencies":{
-    "mockjs":"~1.0.1-beta3"
+  "devDependencies": {
+    "mockjs": "^1.0.1-beta3"
   }
 }
